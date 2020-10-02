@@ -18,8 +18,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: process.env.NODE_ENV === 'production' 
-        ? ["style-loader", "css-loader"]
-        : MiniCssExtractPlugin.loader
+        ? MiniCssExtractPlugin.loader
+        : ["style-loader", "css-loader"]
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
@@ -40,7 +40,7 @@ module.exports = {
    */
   plugins: [
       new webpack.BannerPlugin({
-        banner:`[alan] build date: ${new Date().toLocalString()}`
+        banner:`[alan] build date: ${new Date().toLocaleString()}`
       }),
       new HtmlWebpackPlugin({
         template:'./src/index.html',
