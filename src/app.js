@@ -8,7 +8,8 @@ import MainController from './controllers/MainController.js'
 import './app.scss'
 
 const foo = ''
+console.log(foo)
 
 document.addEventListener("DOMContentLoaded", ()=>{
-new MainController();;;; 
+new MainController(); 
 })
