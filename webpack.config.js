@@ -3,10 +3,11 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   // TODO: 환경변수 NODE_ENV에 따라 development나 production 값을 설정하세요 
-  mode: "development",
+  mode: process.env.NODE_ENV === "production" ? "production" : "development",
   entry: {
     main: "./src/app.js"
   },
@@ -71,7 +72,16 @@ module.exports = {
     new CleanWebpackPlugin(),
     ...(process.env.NODE_ENV === "production"
       ? [new MiniCssExtractPlugin({ filename: `[name].css` })]
-      : [])
-  ]
+      : []),
+    new CopyWebpackPlugin({
+      from:'../node_modules/axios/dist/axios.min.js',
+      to:'./axios.min.js'
+    })
+  ],
   // TODO: 여기에 최적화 설정을 구성하세요 
+  Optimization: {
+    externals: [
+      "axios"
+    ],
+  }
 };
